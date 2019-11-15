@@ -89,6 +89,7 @@ type Feed struct {
 	Nickname    string              `json:"nickname"` // This is not set by the package, but could be helpful.
 	Title       string              `json:"title"`
 	Description string              `json:"description"`
+	Author      string              `json:"author"`
 	Link        string              `json:"link"`      // Link to the creator's website.
 	UpdateURL   string              `json:"updateurl"` // URL of the feed itself.
 	Image       *Image              `json:"image"`     // Feed icon.

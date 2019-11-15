@@ -20,6 +20,7 @@ func parseAtom(data []byte) (*Feed, error) {
 	out := new(Feed)
 	out.Title = feed.Title
 	out.Description = feed.Description
+	out.Author = feed.Author
 	for _, link := range feed.Link {
 		if link.Rel == "alternate" || link.Rel == "" {
 			out.Link = link.Href
@@ -102,6 +103,7 @@ type atomFeed struct {
 	XMLName     xml.Name   `xml:"feed"`
 	Title       string     `xml:"title"`
 	Description string     `xml:"subtitle"`
+	Author      string     `xml:"author>name"`
 	Link        []atomLink `xml:"link"`
 	Image       atomImage  `xml:"image"`
 	Items       []atomItem `xml:"entry"`
