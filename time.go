@@ -62,6 +62,7 @@ var TimeLayouts = []string{
 	"2 Jan 2006 15:04:05 MST -0700",
 	"Mon, 2 Jan 2006 15:04:05 MST -0700",
 	"Mon, 2 Jan 2006 15:04:05 -0700 MST",
+	"Mon, _2 Jan 2006 15:04 MST",
 	"2 Jan 06 15:04:05 -0700 MST",
 	"2 Jan 06 15:04:05 MST -0700",
 	"Jan 2, 2006 15:04 PM -0700 MST",
