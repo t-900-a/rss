@@ -2,6 +2,7 @@ package rss
 
 import (
 	"bytes"
+	"encoding/json"
 	"encoding/xml"
 	"fmt"
 	"time"
@@ -149,5 +150,14 @@ func (a *atomImage) Image() *Image {
 	out.URL = a.URL
 	out.Height = uint32(a.Height)
 	out.Width = uint32(a.Width)
+	return out
+}
+
+func (a *atomAuthor) Author() *Author {
+	out := new(Author)
+	out.Name = a.Name
+	out.URI = a.URI
+	out.Email = a.Email
+	out.Extension, _ = json.Marshal(a.Extension)
 	return out
 }
