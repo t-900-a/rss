@@ -279,12 +279,19 @@ type Image struct {
 	Width  uint32 `json:"width"`
 }
 
+// Link maps a Link.
+type Link struct {
+	Href string `json:"href"`
+	Rel  string `json:"rel"`
+	Type string `json:"type"`
+}
+
 // Author maps an Author.
 type Author struct {
 	Name      string `json:"name"`
 	URI       string `json:"uri"`
 	Email     string `json:"email"`
-	Extension string `json:"link"`
+	Extension *Link  `json:"extension"`
 }
 
 // Get uses http.Get to fetch an image.
