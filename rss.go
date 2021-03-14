@@ -89,7 +89,7 @@ type Feed struct {
 	Nickname    string              `json:"nickname"` // This is not set by the package, but could be helpful.
 	Title       string              `json:"title"`
 	Description string              `json:"description"`
-	Author      string              `json:"author"`
+	Author      *Author             `json:"author"`
 	Link        string              `json:"link"`      // Link to the creator's website.
 	UpdateURL   string              `json:"updateurl"` // URL of the feed itself.
 	Image       *Image              `json:"image"`     // Feed icon.
@@ -277,6 +277,14 @@ type Image struct {
 	URL    string `json:"url"`
 	Height uint32 `json:"height"`
 	Width  uint32 `json:"width"`
+}
+
+// Author maps an Author.
+type Author struct {
+	Name      string `json:"name"`
+	URI       string `json:"uri"`
+	Email     string `json:"email"`
+	Extension string `json:"link"`
 }
 
 // Get uses http.Get to fetch an image.
