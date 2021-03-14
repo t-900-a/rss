@@ -137,10 +137,10 @@ type atomLink struct {
 }
 
 type atomAuthor struct {
-	Name      string   `xml:"name"`
-	URI       string   `xml:"uri"`
-	Email     string   `xml:"email"`
-	Extension atomLink `xml:"link"`
+	Name       string     `xml:"name"`
+	URI        string     `xml:"uri"`
+	Email      string     `xml:"email"`
+	Extensions []atomLink `xml:"link"`
 }
 
 func (a *atomImage) Image() *Image {
@@ -153,14 +153,20 @@ func (a *atomImage) Image() *Image {
 }
 
 func (a *atomAuthor) Author() *Author {
-	e := new(Link)
-	e.Href = a.Extension.Href
-	e.Rel = a.Extension.Rel
-	e.Type = a.Extension.Type
+	e := make([]*Link, 0, len(a.Extensions))
+	l := new(Link)
+	for _, ext := range a.Extensions {
+		l = nil
+		l = new(Link)
+		l.Href = ext.Href
+		l.Rel = ext.Rel
+		l.Type = ext.Type
+		e = append(e, l)
+	}
 	out := new(Author)
 	out.Name = a.Name
 	out.URI = a.URI
 	out.Email = a.Email
-	out.Extension = e
+	out.Extensions = e
 	return out
 }

@@ -288,10 +288,10 @@ type Link struct {
 
 // Author maps an Author.
 type Author struct {
-	Name      string `json:"name"`
-	URI       string `json:"uri"`
-	Email     string `json:"email"`
-	Extension *Link  `json:"extension"`
+	Name       string  `json:"name"`
+	URI        string  `json:"uri"`
+	Email      string  `json:"email"`
+	Extensions []*Link `json:"extensions"`
 }
 
 // Get uses http.Get to fetch an image.
