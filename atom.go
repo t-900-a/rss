@@ -9,7 +9,7 @@ import (
 
 func parseAtom(data []byte) (*Feed, error) {
 	warnings := false
-	feed := atomFeed{}
+	feed := AtomFeed{}
 	p := xml.NewDecoder(bytes.NewReader(data))
 	p.CharsetReader = charsetReader
 	err := p.Decode(&feed)
@@ -99,29 +99,29 @@ type RAWContent struct {
 	RAWContent string `xml:",innerxml"`
 }
 
-type atomFeed struct {
+type AtomFeed struct {
 	XMLName     xml.Name   `xml:"feed"`
 	Title       string     `xml:"title"`
 	Description string     `xml:"subtitle"`
-	Author      atomAuthor `xml:"author"`
-	Link        []atomLink `xml:"link"`
-	Image       atomImage  `xml:"image"`
-	Items       []atomItem `xml:"entry"`
+	Author      AtomAuthor `xml:"author"`
+	Link        []AtomLink `xml:"link"`
+	Image       AtomImage  `xml:"image"`
+	Items       []AtomItem `xml:"entry"`
 	Updated     string     `xml:"updated"`
 }
 
-type atomItem struct {
+type AtomItem struct {
 	XMLName   xml.Name   `xml:"entry"`
 	Title     string     `xml:"title"`
 	Summary   string     `xml:"summary"`
 	Content   RAWContent `xml:"content"`
-	Links     []atomLink `xml:"link"`
+	Links     []AtomLink `xml:"link"`
 	Date      string     `xml:"updated"`
 	DateValid bool
 	ID        string `xml:"id"`
 }
 
-type atomImage struct {
+type AtomImage struct {
 	XMLName xml.Name `xml:"image"`
 	Title   string   `xml:"title"`
 	URL     string   `xml:"url"`
@@ -129,21 +129,21 @@ type atomImage struct {
 	Width   int      `xml:"width"`
 }
 
-type atomLink struct {
+type AtomLink struct {
 	Href   string `xml:"href,attr"`
 	Rel    string `xml:"rel,attr"`
 	Type   string `xml:"type,attr"`
 	Length uint   `xml:"length,attr"`
 }
 
-type atomAuthor struct {
+type AtomAuthor struct {
 	Name       string     `xml:"name"`
 	URI        string     `xml:"uri"`
 	Email      string     `xml:"email"`
-	Extensions []atomLink `xml:"link"`
+	Extensions []AtomLink `xml:"link"`
 }
 
-func (a *atomImage) Image() *Image {
+func (a *AtomImage) Image() *Image {
 	out := new(Image)
 	out.Title = a.Title
 	out.URL = a.URL
@@ -152,7 +152,7 @@ func (a *atomImage) Image() *Image {
 	return out
 }
 
-func (a *atomAuthor) Author() *Author {
+func (a *AtomAuthor) Author() *Author {
 	e := make([]*Link, 0, len(a.Extensions))
 	l := new(Link)
 	for _, ext := range a.Extensions {
